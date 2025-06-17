@@ -3,3 +3,6 @@ pdflatex thebook.tex
 
 @echo Building EPUB ...
 tex4ebook -c thebook.cfg -f epub thebook.tex
+
+@echo Building MOBI ...
+tex4ebook -c thebook.cfg -f mobi thebook.tex

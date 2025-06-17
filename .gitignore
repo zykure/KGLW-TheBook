@@ -11,10 +11,14 @@
 *.lg
 *.log
 *.ncx
+*.out
 *.tmp
 *.toc
+*.xdy
 *.xref
-thebook-epub/
+thebook-*/
 thebook.css
 thebook.dvi
+thebook.out.ps
 thebook*.html
+helpers4ht/

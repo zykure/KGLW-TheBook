@@ -2,16 +2,16 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{utopia}
-\usepackage{imakeidx}
+\ifdefined\HCode
+	\usepackage[xindy,noautomatic]{imakeidx}
+\else
+	\usepackage[]{imakeidx}
+\fi
+\usepackage{tex4ebook}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
-\usepackage{bookmark}
-
-\ifdefined\HCode
-	\usepackage[tex4ht]{hyperref}
-\else
-	\usepackage{hyperref}
-\fi
+\usepackage{xcolor}
+\usepackage[hyperindex=true]{hyperref}
 
 \setlength{\parindent}{0pt}
 
@@ -22,7 +22,7 @@
 
 \renewcommand{\chaptername}{Album}
 
-\makeindex[columns=1,intoc,title=Song Index,options=-s thebook.ist]
+\makeindex[columns=1,title=Song Index,options=-s thebook.ist]
 
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
 King Gizzard \& the Lizard Wizard -- The Book} 
@@ -36,9 +36,7 @@ King Gizzard \& the Lizard Wizard -- The Book}
 \newcommand{\note}[1]{\emph{#1}\newline}
 
 \maketitle
-
 \tableofcontents
-%\listofsongs
 
 \include{lyrics/12-bar-bruise}
 
