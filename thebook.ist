@@ -1,0 +1,8 @@
+indent_length 0
+group_skip "\n"
+
+item_0 "\n \\item \\small "
+
+delim_0 " \\hfill "
+delim_1 " \\hfill "
+delim_2 " \\hfill "

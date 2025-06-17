@@ -1,0 +1,48 @@
+\documentclass[a4paper,11pt,titlepage]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{utopia}
+\usepackage{imakeidx}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{bookmark}
+
+\ifdefined\HCode
+	\usepackage[tex4ht]{hyperref}
+\else
+	\usepackage{hyperref}
+\fi
+
+\setlength{\parindent}{0pt}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\renewcommand{\chaptername}{Album}
+
+\makeindex[columns=1,intoc,title=Song Index,options=-s thebook.ist]
+
+\title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
+King Gizzard \& the Lizard Wizard -- The Book} 
+%\author{Me}
+\date{\today}
+
+\begin{document}
+
+\newcommand{\album}[1]{\chapter{#1}}
+\newcommand{\song}[1]{\section{#1}\index{#1}}
+\newcommand{\note}[1]{\emph{#1}\newline}
+
+\maketitle
+
+\tableofcontents
+%\listofsongs
+
+\include{lyrics/12-bar-bruise}
+
+\clearpage
+\printindex 
+
+\end{document}
