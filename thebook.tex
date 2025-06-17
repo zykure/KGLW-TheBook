@@ -1,4 +1,5 @@
 \documentclass[a4paper,11pt,titlepage]{report}
+\usepackage[a4paper,total={6in,9in}]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{utopia}
@@ -22,6 +23,10 @@
 \hyphenpenalty=10000
 \hbadness=10000
 
+% Avoid single lines on pages (widows/orphans)
+\widowpenalty=10000
+\clubpenalty=10000
+
 % Replace "Chaper #" with "Album #"
 \renewcommand{\chaptername}{Album}
 
@@ -29,7 +34,7 @@
 \providecommand*\lettergroup[1]{}
 
 % Make alphabetical song index (using style file)
-\makeindex[columns=1,title=Song Index,options=-s thebook.ist]
+\makeindex[intoc,columns=3,title=Song Index,options=-s thebook.ist]
 
 % Setup title page
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
@@ -46,12 +51,14 @@
 \newcommand{\song}[1]{\section{#1}\index{#1}}
 \newcommand{\note}[1]{\emph{#1}\newline}
 
-% Make title page and TOC
+% Make title page
 \maketitle
-\tableofcontents
 
+% Print table of contents
+\tableofcontents
 % Add lyrics
 \include{lyrics/12-bar-bruise}
+\include{lyrics/phantom-island}
 
 % Print song index
 \clearpage
