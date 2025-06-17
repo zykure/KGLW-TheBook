@@ -14,7 +14,7 @@ All lyrics are copyright by King Gizzard & the Lizard Wizard and the respective 
 * LaTeX packages: `inputenc, fontenc, utopia, imakeidx, fancyhdr, graphicx, xcolor, hyperref`
   * The `indexing4ht` package from https://github.com/michal-h21/helpers4ht is included here
 * Xindy (for indexing support with TeX4ht)
-* Calibre or Kindlegen (to produce MOBI format for Kindle devices)
+* Calibre (to produce MOBI format for Kindle devices)
 * HTML Tidy (for cleaning up HTML files)
 
 Ubuntu one-liner:
@@ -25,12 +25,12 @@ sudo apt install texlive-extra texlive-extra-utils xindy calibre tidy
 
 ## Building
 
-Simply run the build script `build.sh` (Linux) or `build.bat` Windows.
+Simply run the build script `build.sh` (Linux) or `build.bat` (Windows).
 This should produce the PDF result from LaTeX, and the EPUB/MOBI converted result using TeX4ht.
 
 ## Notes
 
 A big thanks to @michal-h21 for creating the TeX4ebook package: https://github.com/michal-h21/tex4ebook
 
-Shoutout to https://kglw.net, https://weirdoswarm.org, https://gizzheads.de and the Gizz global community!
+Shoutout to [kglw.net](https://kglw.net), [weirdoswarm.org](https://weirdoswarm.org), [gizzheads.de](https://gizzheads.de) and the Gizz global community!
 
