@@ -13,33 +13,47 @@
 \usepackage{xcolor}
 \usepackage[hyperindex=true]{hyperref}
 
+% Remove paragraph indentation
 \setlength{\parindent}{0pt}
 
+% Disable hyphenation
 \tolerance=1
 \emergencystretch=\maxdimen
 \hyphenpenalty=10000
 \hbadness=10000
 
+% Replace "Chaper #" with "Album #"
 \renewcommand{\chaptername}{Album}
 
+% Remove lettergroups from EPUB index
+\providecommand*\lettergroup[1]{}
+
+% Make alphabetical song index (using style file)
 \makeindex[columns=1,title=Song Index,options=-s thebook.ist]
 
+% Setup title page
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
-The Book} 
+    The Book} 
 \author{King Gizzard \& the Lizard Wizard}
 \date{\today}
 
+%======================================================================
+
 \begin{document}
 
+% Define some shortcuts
 \newcommand{\album}[1]{\chapter{#1}}
 \newcommand{\song}[1]{\section{#1}\index{#1}}
 \newcommand{\note}[1]{\emph{#1}\newline}
 
+% Make title page and TOC
 \maketitle
 \tableofcontents
 
+% Add lyrics
 \include{lyrics/12-bar-bruise}
 
+% Print song index
 \clearpage
 \printindex 
 

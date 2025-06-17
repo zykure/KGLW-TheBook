@@ -2,7 +2,7 @@
 pdflatex thebook.tex
 
 @echo Building EPUB ...
-tex4ebook -c thebook.cfg -f epub thebook.tex
+tex4ebook -m index -c thebook.cfg -e thebook.mk4 -f epub thebook.tex
 
 @echo Building MOBI ...
-tex4ebook -c thebook.cfg -f mobi thebook.tex
+ebook-convert thebook.epub thebook.mobi
