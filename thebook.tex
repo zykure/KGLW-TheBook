@@ -34,7 +34,10 @@
 \providecommand*\lettergroup[1]{}
 
 % Make alphabetical song index (using style file)
-\makeindex[intoc,columns=3,title=Song Index,options=-s thebook.ist]
+\makeindex[intoc,name=songs,columns=3,title={Song Index},options={-s thebook.ist}]
+
+% Make word index (using style file)
+\makeindex[intoc,columns=3,title={Word Index},options={-s thebook.ist}]
 
 % Setup title page
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
@@ -47,9 +50,15 @@
 \begin{document}
 
 % Define some shortcuts
+\newcommand{\lindex}[1]{%
+  \lowercase{\def\temp{#1}}%
+  \expandafter\index\expandafter{\temp}%
+}
+
 \newcommand{\album}[1]{\chapter{#1}}
-\newcommand{\song}[1]{\section{#1}\index{#1}}
+\newcommand{\song}[1]{\section{#1}\index[songs]{#1}}
 \newcommand{\note}[1]{\emph{#1}\newline}
+\newcommand{\word}[1]{\underline{#1}\lindex{#1}}
 
 % Make title page
 \maketitle
@@ -58,10 +67,14 @@
 \tableofcontents
 % Add lyrics
 \include{lyrics/12-bar-bruise}
+
+\include{lyrics/the-silver-cord}
+\include{lyrics/flight-b741}
 \include{lyrics/phantom-island}
 
 % Print song index
 \clearpage
-\printindex 
+\printindex[songs]
+\printindex
 
 \end{document}
