@@ -55,7 +55,8 @@
   \expandafter\index\expandafter{\temp}%
 }
 
-\newcommand{\album}[1]{\chapter{#1}}
+\newcommand{\album}[1]{\chapter{#1}\vspace*{-1cm}}
+\newcommand{\albumart}[1]{\begin{center}\includegraphics[width=4cm]{artworks/#1}\end{center}}
 \newcommand{\song}[1]{\section{#1}\index[songs]{#1}}
 \newcommand{\note}[1]{\emph{#1}\newline}
 \newcommand{\word}[1]{\underline{#1}\lindex{#1}}
@@ -67,7 +68,8 @@
 \tableofcontents
 % Add lyrics
 \include{lyrics/12-bar-bruise}
-
+% ...
+\include{lyrics/petrodragonic-apocalypse}
 \include{lyrics/the-silver-cord}
 \include{lyrics/flight-b741}
 \include{lyrics/phantom-island}
