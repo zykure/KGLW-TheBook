@@ -2,6 +2,9 @@
 
 echo "Building PDF ..."
 pdflatex thebook.tex
+pdflatex thebook.tex
+makeindex thebook.idx
+pdflatex thebook.tex
 
 echo "Building EPUB ..."
 tex4ebook -m index -c thebook.cfg -e thebook.mk4 -f epub thebook.tex
