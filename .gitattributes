@@ -1,2 +1,14 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+thebook.pdf filter=lfs diff=lfs merge=lfs -text
+cover-image.jpg filter=lfs diff=lfs merge=lfs -text
+img/ice-death-planets-mushrooms-lava.jpg filter=lfs diff=lfs merge=lfs -text
+img/laminated-denim.jpg filter=lfs diff=lfs merge=lfs -text
+img/omnium-gatherum.jpg filter=lfs diff=lfs merge=lfs -text
+img/petrodragonic-apocalypse.jpg filter=lfs diff=lfs merge=lfs -text
+img/phantom-island.jpg filter=lfs diff=lfs merge=lfs -text
+img/the-silver-cord.jpg filter=lfs diff=lfs merge=lfs -text
+img/changes.jpg filter=lfs diff=lfs merge=lfs -text
+img/flight-b741.jpg filter=lfs diff=lfs merge=lfs -text
+thebook.epub filter=lfs diff=lfs merge=lfs -text
+thebook.mobi filter=lfs diff=lfs merge=lfs -text
