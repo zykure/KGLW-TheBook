@@ -1,5 +1,6 @@
 \documentclass[a4paper,11pt,titlepage]{report}
 \usepackage[a4paper,total={6in,9in}]{geometry}
+\usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{utopia}
@@ -9,9 +10,9 @@
 	\usepackage[]{imakeidx}
 \fi
 \usepackage{tex4ebook}
+\usepackage{ifthen}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
-\usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[hyperindex=true]{hyperref}
@@ -36,7 +37,7 @@
 \makeindex[intoc,name=songs,columns=3,title={Song Index},options={-s thebook.ist}]
 
 % Make word index (using style file)
-\makeindex[intoc,columns=3,title={Word Index},options={-s thebook.ist}]
+\makeindex[intoc,columns=2,title={Word Index},options={-s thebook.ist}]
 
 % Setup title page
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
@@ -78,7 +79,12 @@
 \newcommand{\albumart}[1]{\begin{center}\includegraphics[width=4cm]{artworks/#1}\end{center}}
 \newcommand{\song}[1]{\section{#1}\index[songs]{#1}}
 \newcommand{\note}[1]{\emph{#1}\newline}
-\newcommand{\word}[1]{\underline{#1}\lindex{#1}}
+\newcommand{\word}[2][]{%
+	\underline{#2}%
+	\ifthenelse{\equal {#1}{}}%
+	{\lindex{#2}}%
+	{\lindex{#1}}%
+}
 
 % Make title page
 \maketitle
@@ -98,6 +104,8 @@
 % Add lyrics
 \include{lyrics/12-bar-bruise}
 % ...
+\include{lyrics/laminated-denim}
+\include{lyrics/changes}
 \include{lyrics/petrodragonic-apocalypse}
 \include{lyrics/the-silver-cord}
 \include{lyrics/flight-b741}
