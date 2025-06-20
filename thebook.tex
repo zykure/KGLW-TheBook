@@ -10,12 +10,11 @@
 \fi
 \usepackage{tex4ebook}
 \usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[hyperindex=true]{hyperref}
-
-% Remove paragraph indentation
-\setlength{\parindent}{0pt}
 
 % Disable hyphenation
 \tolerance=1
@@ -41,9 +40,29 @@
 
 % Setup title page
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
-    The Book} 
+    The Book\\{\large of Lyrics}} 
 \author{King Gizzard \& the Lizard Wizard}
 \date{\today}
+
+% Adjust head height for fancyhdr
+\setlength{\headheight}{14pt}
+\addtolength{\topmargin}{-2pt}
+
+% This must be here, because defaults are set and renewcommand for section marks will work.
+\pagestyle{fancy} 
+
+% Setup page headers/footers
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\fancypagestyle{plain}{%
+   \fancyhf{} % clear all fields
+   \renewcommand{\headrulewidth}{1pt}
+   \lhead{\nouppercase{\leftmark}}
+   \rhead{\nouppercase{\textit{\rightmark}}}
+   \lfoot{}
+   \cfoot{\thepage / \pageref{LastPage}}
+   \rfoot{}
+}%
 
 %======================================================================
 
@@ -63,9 +82,19 @@
 
 % Make title page
 \maketitle
+\clearpage
+
+\pagestyle{empty}
+
+% Make frontmatter page
+\include{frontmatter.tex}
+\clearpage
 
 % Print table of contents
 \tableofcontents
+
+\pagestyle{plain}
+
 % Add lyrics
 \include{lyrics/12-bar-bruise}
 % ...

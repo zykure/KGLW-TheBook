@@ -1,12 +1,14 @@
 # KGLW - TheBook
 
-This ebook collects all lyrics from the Australian band King Gizzard & the Lizard Wizard.
-The include songs are grouped by album, and albums are added in chronological order (oldest first.)
-There is also an index at the end of the document that lists all songs in alphabetical order, regardless of album.
+This e-book collects all lyrics from the Australian band King Gizzard & the Lizard Wizard.
+I started this project in June 2025 because I wanted to read Gizz lyrics on my e-book reader while listening to their music.
+The included songs are grouped by album, and albums are added in chronological order (oldest first.)
+There is also a song index at the end of the document that lists all songs in alphabetical order regardless of album,
+and a word index that references selected words that are reoccuring throughout the lyrics.
 
 ## Copyright
 
-All lyrics are copyright by King Gizzard & the Lizard Wizard and the respective authors, as noted in each song.
+All artwork and lyrics are copyright by King Gizzard & the Lizard Wizard and the respective authors.
 
 ## Requirements
 
@@ -33,4 +35,3 @@ This should produce the PDF result from LaTeX, and the EPUB/MOBI converted resul
 A big thanks to @michal-h21 for creating the TeX4ebook package: https://github.com/michal-h21/tex4ebook
 
 Shoutout to [kglw.net](https://kglw.net), [weirdoswarm.org](https://weirdoswarm.org), [gizzheads.de](https://gizzheads.de) and the Gizz global community!
-
