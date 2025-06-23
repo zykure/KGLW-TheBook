@@ -1,6 +1,7 @@
 \documentclass[a4paper,11pt,titlepage]{report}
 \usepackage[a4paper,total={6in,9in}]{geometry}
 \usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
+\usepackage{relsize}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{utopia}
@@ -16,6 +17,16 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[hyperindex=true]{hyperref}
+
+% Adjust PDF hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={KGLW - The Book of Lyrics},
+    pdfpagemode=FullScreen,
+}
 
 % Disable hyphenation
 \tolerance=1
@@ -41,7 +52,9 @@
 
 % Setup title page
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
-    The Book\\{\large of Lyrics}} 
+    The Book\\%
+    {\relscale{0.8} of Lyrics}%
+} 
 \author{King Gizzard \& the Lizard Wizard}
 \date{\today}
 

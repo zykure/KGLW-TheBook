@@ -13,7 +13,7 @@ All artwork and lyrics are copyright by King Gizzard & the Lizard Wizard and the
 ## Requirements
 
 * TexLive or MiKTeX installation with TeX4ht / TeX4ebook support
-* LaTeX packages: `geometry, parskip, inputenc, fontenc, utopia, imakeidx, tex4ebook, ifthen, fancyhdr, lastpage, graphicx, xcolor, hyperref`
+* LaTeX packages: `geometry, parskip, relsize, inputenc, fontenc, utopia, imakeidx, tex4ebook, ifthen, fancyhdr, lastpage, graphicx, xcolor, hyperref`
   * The `indexing4ht` package from https://github.com/michal-h21/helpers4ht is included here
 * Xindy (for indexing support with TeX4ht)
 * Calibre (to produce MOBI format for Kindle devices)
