@@ -13,6 +13,7 @@
 \usepackage{tex4ebook}
 \usepackage{ifthen}
 \usepackage{fancyhdr}
+\usepackage{titlesec}
 \usepackage{lastpage}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -78,6 +79,12 @@
    \rfoot{}
 }%
 
+% Center chapter titles and set spacing
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\centering}{\centering\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}
+  {0pt}{20pt}{40pt}
+
 %======================================================================
 
 \begin{document}
@@ -88,11 +95,26 @@
   \expandafter\index\expandafter{\temp}%
 }
 
-\newcommand{\album}[1]{\chapter{#1}\vspace*{-1cm}}
-\newcommand{\artwork}[1]{\begin{center}\includegraphics[width=4cm]{artworks/#1}\end{center}}
-\newcommand{\released}[1]{\textit{#1}\newline}
-\newcommand{\song}[1]{\section{#1}\index[songs]{#1}}
-\newcommand{\note}[1]{\emph{#1}\newline}
+\newcommand{\album}[2][]{%
+    \ifthenelse{\equal {#1}{}}%
+    {\chapter[#2]{#2}}%
+    {\chapter[#1]{#2}}%
+    \vspace*{-1cm}%
+}
+\newcommand{\artwork}[1]{%
+    \begin{center}%
+        \includegraphics[width=4cm]{artworks/#1}%
+    \end{center}%
+}
+\newcommand{\released}[1]{%
+    \begin{center}\textit{Released: #1}\end{center}%
+}
+\newcommand{\song}[1]{%
+    \section{#1}\index[songs]{#1}%
+}
+\newcommand{\note}[1]{%
+    \emph{#1}\newline%
+}
 \newcommand{\word}[2][]{%
 	\underline{#2}%
 	\ifthenelse{\equal {#1}{}}%
