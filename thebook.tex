@@ -22,7 +22,7 @@
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
     pdftitle={KGLW - The Book of Lyrics},
     pdfpagemode=FullScreen,
@@ -54,7 +54,7 @@
 \title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
     The Book\\%
     {\relscale{0.8} of Lyrics}%
-} 
+}
 \author{King Gizzard \& the Lizard Wizard}
 \date{\today}
 
@@ -63,7 +63,7 @@
 \addtolength{\topmargin}{-2pt}
 
 % This must be here, because defaults are set and renewcommand for section marks will work.
-\pagestyle{fancy} 
+\pagestyle{fancy}
 
 % Setup page headers/footers
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
@@ -89,7 +89,8 @@
 }
 
 \newcommand{\album}[1]{\chapter{#1}\vspace*{-1cm}}
-\newcommand{\albumart}[1]{\begin{center}\includegraphics[width=4cm]{artworks/#1}\end{center}}
+\newcommand{\artwork}[1]{\begin{center}\includegraphics[width=4cm]{artworks/#1}\end{center}}
+\newcommand{\released}[1]{\textit{#1}\newline}
 \newcommand{\song}[1]{\section{#1}\index[songs]{#1}}
 \newcommand{\note}[1]{\emph{#1}\newline}
 \newcommand{\word}[2][]{%
@@ -117,6 +118,17 @@
 % Add lyrics
 \include{lyrics/12-bar-bruise}
 % ...
+\include{lyrics/nonagon-infinity}
+\include{lyrics/flying-microtonal-banana}
+\include{lyrics/murder-of-the-universe}
+\include{lyrics/sketches-of-brunswick-east}
+\include{lyrics/polygondwanaland}
+\include{lyrics/gumboot-soup}
+\include{lyrics/fishing-for-fishies}
+\include{lyrics/infest-the-rats-nest}
+\include{lyrics/kg.tex}
+\include{lyrics/lw.tex}
+\include{lyrics/butterfly-3000}
 \include{lyrics/made-in-timeland.tex}
 \include{lyrics/omnium-gatherum.tex}
 \include{lyrics/ice-death-planets-mushrooms-lava.tex}
