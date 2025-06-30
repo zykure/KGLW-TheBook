@@ -1,4 +1,5 @@
 \documentclass[a4paper,11pt,titlepage]{report}
+
 \usepackage[a4paper,total={6in,9in}]{geometry}
 \usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage{relsize}
@@ -27,7 +28,16 @@
     urlcolor=cyan,
     pdftitle={KGLW - The Book of Lyrics},
     pdfpagemode=FullScreen,
+    bookmarks=true,
+    bookmarksopen=true,
 }
+
+% Create a simple test if Tex4ht is loaded
+% This is used to determine if the book is compiled with TeX4ht or not.
+\makeatletter
+\@ifpackageloaded{tex4ht}{\def\iftex4ht{\iftrue}}
+                         {\def\iftex4ht{\iffalse}}
+\makeatother
 
 % Disable hyphenation
 \tolerance=1
@@ -85,6 +95,23 @@
 \titlespacing*{\chapter}
   {0pt}{20pt}{40pt}
 
+\ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
+
+% Create special chapter environment (used for EP's and singles)
+\makeatletter
+\newcounter{specialchapter}
+% Defines a new environment for special chapters
+\newenvironment{specialChapterEnvironment}
+ {%
+  \let\c@chapter\c@specialchapter
+  \renewcommand{\chaptername}{EP}%
+  \renewcommand{\thechapter}{\Roman{chapter}}%
+  \renewcommand{\theHchapter}{\Roman{chapter}}%
+  % add here other settings
+ }
+ {}
+\makeatother
+
 %======================================================================
 
 \begin{document}
@@ -133,13 +160,24 @@
 \clearpage
 
 % Print table of contents
-\tableofcontents
+\iftex4ht
+\else
+  \tableofcontents
+\fi
 
 \pagestyle{plain}
 
 % Add lyrics
+\include{lyrics/willoughbys-beach}
+\include{lyrics/teenage-gizzard}
+%
 \include{lyrics/12-bar-bruise}
-% ...
+\include{lyrics/eyes-like-the-sky}
+\include{lyrics/float-along}
+\include{lyrics/oddments}
+\include{lyrics/im-in-your-mind-fuzz}
+\include{lyrics/quarters}
+\include{lyrics/paper-mache-dream-balloon}
 \include{lyrics/nonagon-infinity}
 \include{lyrics/flying-microtonal-banana}
 \include{lyrics/murder-of-the-universe}
