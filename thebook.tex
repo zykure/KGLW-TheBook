@@ -54,9 +54,6 @@
 \widowpenalty=10000
 \clubpenalty=10000
 
-% Replace "Chaper #" with "Album #"
-\renewcommand{\chaptername}{Album}
-
 % Remove lettergroups from EPUB index
 \providecommand*\lettergroup[1]{}
 
@@ -101,21 +98,6 @@
   {0pt}{20pt}{40pt}
 
 \ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
-
-% Create special chapter environment (used for EP's and singles)
-\makeatletter
-\newcounter{specialchapter}
-% Defines a new environment for special chapters
-\newenvironment{specialChapterEnvironment}
- {%
-  \let\c@chapter\c@specialchapter
-  \renewcommand{\chaptername}{EP}%
-  \renewcommand{\thechapter}{\Roman{chapter}}%
-  \renewcommand{\theHchapter}{\Roman{chapter}}%
-  % add here other settings
- }
- {}
-\makeatother
 
 %======================================================================
 
@@ -173,9 +155,8 @@
 \pagestyle{plain}
 
 % Add lyrics
-\include{lyrics/willoughbys-beach}
-\include{lyrics/teenage-gizzard}
-%
+% (Albums)
+\renewcommand{\chaptername}{Album}%
 \include{lyrics/12-bar-bruise}
 \include{lyrics/eyes-like-the-sky}
 \include{lyrics/float-along}
@@ -203,6 +184,14 @@
 \include{lyrics/the-silver-cord}
 \include{lyrics/flight-b741}
 \include{lyrics/phantom-island}
+%
+% (EPs)
+\appendix
+\renewcommand\appendixname{EP}%
+\renewcommand{\thechapter}{\Roman{chapter}}%
+\renewcommand{\theHchapter}{\Roman{chapter}}%
+\include{lyrics/willoughbys-beach}
+\include{lyrics/teenage-gizzard}
 
 % Print song index
 \clearpage
