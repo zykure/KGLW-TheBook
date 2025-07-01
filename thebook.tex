@@ -1,11 +1,21 @@
 \documentclass[a4paper,12pt,titlepage]{report}
 
+% Create a simple test if Tex4ht is loaded
+% This is used to determine if the book is compiled with TeX4ht or not.
+\makeatletter
+\@ifpackageloaded{tex4ht}{\def\iftex4ht{\iftrue}}
+                         {\def\iftex4ht{\iffalse}}
+\makeatother
+
 \usepackage[a4paper,total={6in,9in}]{geometry}
 \usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage{relsize}
 \usepackage[utf8]{inputenc}
-\usepackage{clara}
-\usepackage[T1]{fontenc}
+\iftex4ht
+\else
+    \usepackage{clara}
+    \usepackage[T1]{fontenc}
+\fi
 \ifdefined\HCode
 	\usepackage[xindy,noautomatic]{imakeidx}
 \else
@@ -17,6 +27,7 @@
 \usepackage{titlesec}
 \usepackage[defaultlines=3,all]{nowidow}
 \usepackage{lastpage}
+\usepackage[nodayofweek]{datetime}
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage[hyperindex=true]{hyperref}
@@ -32,13 +43,6 @@
     bookmarks=true,
     bookmarksopen=true,
 }
-
-% Create a simple test if Tex4ht is loaded
-% This is used to determine if the book is compiled with TeX4ht or not.
-\makeatletter
-\@ifpackageloaded{tex4ht}{\def\iftex4ht{\iftrue}}
-                         {\def\iftex4ht{\iffalse}}
-\makeatother
 
 % Disable hyphenation
 \tolerance=1
@@ -134,8 +138,8 @@
         \includegraphics[width=4cm]{artworks/#1}%
     \end{center}%
 }
-\newcommand{\released}[1]{%
-    \begin{center}\textit{Released: #1}\end{center}%
+\newcommand{\released}[3]{%
+    \begin{center}\textit{Released: \shortdate\formatdate{#3}{#2}{#1}}\end{center}%
 }
 \newcommand{\song}[1]{%
     \section{#1}\index[songs]{#1}%
