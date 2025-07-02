@@ -123,8 +123,10 @@
 \newcommand{\released}[3]{%
     \begin{center}\textit{Released: \shortdate\formatdate{#3}{#2}{#1}}\end{center}%
 }
-\newcommand{\song}[1]{%
-    \section{#1}\index[songs]{#1}%
+\newcommand{\song}[2][]{%
+    \ifthenelse{\equal {#1}{}}%
+    {\section[#2]{#1}\index[songs]{#2}}%
+    {\section[#1]{#1}\index[songs]{#1}}%
 }
 \newcommand{\note}[1]{%
     \emph{#1}\newline%

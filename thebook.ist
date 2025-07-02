@@ -4,6 +4,3 @@ group_skip "\n"
 item_0 "\n \\item \\small "
 
 delim_0 " \\dotfill "
-delim_1 ", "
-delim_2 ", "
-delim_n ", "

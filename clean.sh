@@ -1,11 +1,10 @@
-*:Zone.Identifier
-*~
-*.bak
+#!/bin/bash
+
+ENDINGS="
+*.opf
+*.aux
 *.4ct
 *.4tc
-*.aux
-*.fdb_latexmk
-*.fls
 *.idv
 *.idx
 *.ilg
@@ -13,7 +12,6 @@
 *.lg
 *.log
 *.ncx
-*.opf
 *.out
 *.tmp
 *.toc
@@ -24,4 +22,8 @@ thebook.css
 thebook.dvi
 thebook.out.ps
 thebook*.html
-helpers4ht/
+"
+
+for end in ${ENDINGS}; do
+    rm -rv -- "${end}" 2>/dev/null
+done
