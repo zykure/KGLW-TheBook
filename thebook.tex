@@ -97,13 +97,22 @@
 \titlespacing*{\chapter}
   {0pt}{20pt}{40pt}
 
+% Fix TeX4ht issues where some commands are undefined
 \ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
+
+% Fix TeX4ht issue with non-escaped ampersand (&) characters in index entries
+\newcommand{\textamp}{\ifdefined\HCode\string&\else\&\fi}
+\newcommand{\textdol}{\ifdefined\HCode\string$\else\$\fi}
 
 %======================================================================
 
 \begin{document}
 
 % Define some shortcuts
+\newcommand{\epubnewpage}{%
+    \iftex4ht\newpage\fi%
+}
+
 \newcommand{\lindex}[1]{%
   \lowercase{\def\temp{#1}}%
   \expandafter\index\expandafter{\temp}%
@@ -121,12 +130,17 @@
     \end{center}%
 }
 \newcommand{\released}[3]{%
-    \begin{center}\textit{Released: \shortdate\formatdate{#3}{#2}{#1}}\end{center}%
+    \begin{center}%
+        \textit{Released: \shortdate\formatdate{#3}{#2}{#1}}%
+    \end{center}%
+%    \epubnewpage%
 }
 \newcommand{\song}[2][]{%
-    \ifthenelse{\equal {#1}{}}%
-    {\section[#2]{#2}\index[songs]{#2}}%
-    {\section[#1]{#2}\index[songs]{#2}}%
+    \ifthenelse{\equal {#1}{}}{%
+        \section[#2]{#2}\index[songs]{#2}%
+    }{%
+        \section[#1]{#2}\index[songs]{#1}%
+    }%
 }
 \newcommand{\note}[1]{%
     \emph{#1}\newline%
@@ -159,6 +173,7 @@
 % Add lyrics
 % (Albums)
 \renewcommand{\chaptername}{Album}%
+%
 \include{lyrics/12-bar-bruise}
 \include{lyrics/eyes-like-the-sky}
 \include{lyrics/float-along}
@@ -192,6 +207,7 @@
 \renewcommand\appendixname{EP}%
 \renewcommand{\thechapter}{\Roman{chapter}}%
 \renewcommand{\theHchapter}{\Roman{chapter}}%
+%
 \include{lyrics/willoughbys-beach}
 \include{lyrics/teenage-gizzard}
 
