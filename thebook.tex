@@ -69,9 +69,9 @@
 \title{%
     \centering%
     \iftex4ht%
-        \includegraphics[width=0.6\linewidth]{cover-image.jpg}\\[1cm]%
+        \includegraphics[width=0.5\linewidth]{cover-image.jpg}\\[5mm]%
     \else
-        \includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
+        \includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[10mm]%
     \fi
     The Book\\%
     {\relscale{0.8} of Lyrics}%
@@ -134,7 +134,12 @@
 }
 \newcommand{\artwork}[1]{%
     \begin{center}%
-        \includegraphics[width=4cm]{artworks/#1}%
+		\iftex4ht%
+			\includegraphics[width=6cm]{artworks/#1}%
+			\epubnewpage%
+		\else%
+			\includegraphics[width=4cm]{artworks/#1}%
+		\fi%
     \end{center}%
 }
 \newcommand{\released}[3]{%
@@ -176,7 +181,7 @@
 % Print table of contents
 \iftex4ht
 \else
-  \tableofcontents
+	\tableofcontents
 \fi
 
 \pagestyle{plain}
@@ -224,7 +229,9 @@
 
 % Print song index
 \clearpage
-\printindex[songs]
-\printindex
+{\relscale{0.8}
+	\printindex[songs]
+	\printindex
+}
 
 \end{document}
