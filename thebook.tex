@@ -13,7 +13,9 @@
 \usepackage[utf8]{inputenc}
 \iftex4ht
 \else
-    \usepackage{clara}
+    \usepackage{CrimsonPro}
+    \let\oldnormalfont\normalfont
+    \def\normalfont{\oldnormalfont\mdseries}
     \usepackage[T1]{fontenc}
 \fi
 \ifdefined\HCode
@@ -64,7 +66,13 @@
 \makeindex[intoc,columns=2,title={Word Index},options={-s thebook.ist}]
 
 % Setup title page
-\title{\centering\includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
+\title{%
+    \centering%
+    \iftex4ht%
+        \includegraphics[width=0.6\linewidth]{cover-image.jpg}\\[1cm]%
+    \else
+        \includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[1cm]%
+    \fi
     The Book\\%
     {\relscale{0.8} of Lyrics}%
 }
@@ -79,7 +87,7 @@
 \pagestyle{fancy}
 
 % Setup page headers/footers
-\renewcommand{\chaptermark}[1]{\markboth{\textsc{#1}}{}}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\arabic{section}.\ #1}}
 \fancypagestyle{plain}{%
    \fancyhf{} % clear all fields
@@ -141,6 +149,9 @@
     }{%
         \section[#1]{#2}\index[songs]{#1}%
     }%
+}
+\newcommand{\writtenby}[1]{%
+    \textscale{0.8}{[Written by: \emph{#1}]}\newline%
 }
 \newcommand{\note}[1]{%
     \emph{#1}\newline%
