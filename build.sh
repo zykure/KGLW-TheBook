@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -x "$(command -v ebb)" ]; then
+    ebb -x cover-image.jpg
+fi
+
 echo "Building PDF ..."
 pdflatex thebook.tex || exit $?
 pdflatex thebook.tex || exit $?
