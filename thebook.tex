@@ -10,7 +10,6 @@
 \usepackage[a4paper,total={6in,9in}]{geometry}
 \usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage{relsize}
-\usepackage[utf8]{inputenc}
 \iftex4ht
 \else
     \usepackage{CrimsonPro}
@@ -18,6 +17,7 @@
     \def\normalfont{\oldnormalfont\mdseries}
     \usepackage[T1]{fontenc}
 \fi
+\usepackage[utf8]{inputenc}
 \ifdefined\HCode
 	\usepackage[xindy,noautomatic]{imakeidx}
 \else
@@ -27,6 +27,8 @@
 \usepackage{ifthen}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
+\usepackage{contour}
+\usepackage[normalem]{ulem}
 \usepackage[defaultlines=3,all]{nowidow}
 \usepackage{lastpage}
 \usepackage[nodayofweek]{datetime}
@@ -69,9 +71,9 @@
 \title{%
     \centering%
     \iftex4ht%
-        \includegraphics[width=0.5\linewidth]{cover-image.jpg}\\[5mm]%
+        \includegraphics[width=0.5\linewidth]{cover-image.jpg}\\[1em]%
     \else
-        \includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[10mm]%
+        \includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[2em]%
     \fi
     The Book\\%
     {\relscale{0.8} of Lyrics}%
@@ -99,11 +101,30 @@
    \rfoot{}
 }%
 
+% Setup word underlining
+\renewcommand{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+\renewcommand{\underline}[1]{%
+    \uline{\phantom{#1}}%
+    \llap{\contour{white}{#1}}%
+}
+
 % Center chapter titles and set spacing
 \titleformat{\chapter}[display]
   {\normalfont\huge\bfseries\centering}{\centering\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titlespacing*{\chapter}
   {0pt}{20pt}{40pt}
+
+% Define environment that prevents any page breaks
+\newenvironment{nopagebreakenv}%
+{%
+    \par\nobreak\vfil\penalty0\vfilneg%
+   \vtop\bgroup
+}{%
+    \par\xdef\tpd{\the\prevdepth}\egroup%
+    \prevdepth=\tpd%
+}%
 
 % Fix TeX4ht issues where some commands are undefined
 \ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
@@ -111,7 +132,7 @@
 % Fix TeX4ht issue with non-escaped ampersand (&) characters in index entries
 \newcommand{\textamp}{\ifdefined\HCode\string&\else\&\fi}
 \newcommand{\textdol}{\ifdefined\HCode\string$\else\$\fi}
-\newcommand{\textexcl}{\ifdefined\HCode\string!\else!\fi}
+\newcommand{\textexcl}{\ifdefined\HCode\string!\else\string"!\fi}
 
 %======================================================================
 
@@ -132,22 +153,28 @@
     {\chapter[#2]{#2}}%
     {\chapter[#1]{#2}}%
     \vspace*{-1cm}%
+    \nopagebreak%
 }
 \newcommand{\artwork}[1]{%
+    \nopagebreak%
     \begin{center}%
 		\iftex4ht%
-			\includegraphics[width=6cm]{artworks/#1}%
-			\epubnewpage%
+			\includegraphics[width=0.6\linewidth]{artworks/#1}%
 		\else%
-			\includegraphics[width=4cm]{artworks/#1}%
+			\includegraphics[width=0.4\linewidth]{artworks/#1}%
 		\fi%
     \end{center}%
+    \nopagebreak%
 }
 \newcommand{\released}[3]{%
+    \nopagebreak%
     \begin{center}%
         \textit{Released: \shortdate\formatdate{#3}{#2}{#1}}%
     \end{center}%
-%    \epubnewpage%
+    \iftex4ht%
+        \epubnewpage%
+    \fi%
+    \nopagebreak%
 }
 \newcommand{\song}[2][]{%
     \ifthenelse{\equal {#1}{}}{%
@@ -155,18 +182,23 @@
     }{%
         \section[#1]{#2}\index[songs]{#1}%
     }%
+    \nopagebreak%
 }
 \newcommand{\writtenby}[1]{%
+    \nopagebreak%
     \textscale{0.8}{[Written by: \emph{#1}]}\newline%
+    \nopagebreak%
 }
 \newcommand{\note}[1]{%
+    \nopagebreak%
     \emph{#1}\newline%
+    \nopagebreak%
 }
 \newcommand{\word}[2][]{%
-	\underline{#2}%
 	\ifthenelse{\equal {#1}{}}%
 	{\lindex{#2}}%
 	{\lindex{#1}}%
+	\underline{#2}%
 }
 
 % Make title page
