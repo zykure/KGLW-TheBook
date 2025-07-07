@@ -112,9 +112,10 @@
 
 % Center chapter titles and set spacing
 \titleformat{\chapter}[display]
-  {\normalfont\huge\bfseries\centering}{\centering\chaptertitlename\ \thechapter}{20pt}{\Huge}
+    {\normalfont\huge\bfseries\centering}
+    {\centering\chaptertitlename\ \thechapter}{20pt}{\Huge}
 \titlespacing*{\chapter}
-  {0pt}{20pt}{40pt}
+    {0pt}{20pt}{40pt}
 
 % Define environment that prevents any page breaks
 \newenvironment{nopagebreakenv}%
@@ -152,10 +153,10 @@
     \ifthenelse{\equal {#1}{}}%
     {\chapter[#2]{#2}}%
     {\chapter[#1]{#2}}%
-    \vspace*{-1cm}%
     \nopagebreak%
 }
 \newcommand{\artwork}[1]{%
+    \vspace*{-2em}%
     \nopagebreak%
     \begin{center}%
 		\iftex4ht%
@@ -167,6 +168,7 @@
     \nopagebreak%
 }
 \newcommand{\released}[3]{%
+    \vspace*{-1em}%
     \nopagebreak%
     \begin{center}%
         \textit{Released: \shortdate\formatdate{#3}{#2}{#1}}%
