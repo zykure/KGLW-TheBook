@@ -7,7 +7,7 @@
                          {\def\iftex4ht{\iffalse}}
 \makeatother
 
-\usepackage[a4paper,total={6in,9in}]{geometry}
+\usepackage[a4paper,total={6.5in,9in}]{geometry}
 \usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
 \usepackage{relsize}
 \iftex4ht
@@ -59,6 +59,7 @@
 \clubpenalty=10000
 
 % Remove lettergroups from EPUB index
+\providecommand*\lettergroupDefault[1]{}
 \providecommand*\lettergroup[1]{}
 
 % Make alphabetical song index (using style file)
@@ -118,16 +119,6 @@
 \titlespacing*{\chapter}
     {0pt}{20pt}{40pt}
 
-% Define environment that prevents any page breaks
-\newenvironment{nopagebreakenv}%
-{%
-    \par\nobreak\vfil\penalty0\vfilneg%
-   \vtop\bgroup
-}{%
-    \par\xdef\tpd{\the\prevdepth}\egroup%
-    \prevdepth=\tpd%
-}%
-
 % Fix TeX4ht issues where some commands are undefined
 \ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
 
@@ -145,18 +136,34 @@
     \iftex4ht\newpage\fi%
 }
 
+% args: text
 \newcommand{\lindex}[1]{%
   \lowercase{\def\temp{#1}}%
   \expandafter\index\expandafter{\temp}%
 }
 
-\newcommand{\album}[2][]{%
-    \ifthenelse{\equal {#1}{}}%
-    {\chapter[#2]{#2}}%
-    {\chapter[#1]{#2}}%
+% args: toc-title, title
+\NewDocumentCommand{\album}{O{} m}{%
+    \ifthenelse{\equal {#1}{}}{%
+        \chapter{#2}%
+    }{%
+        \chapter[#1]{#2}%
+    }%
     \nopagebreak%
 }
-\newcommand{\artwork}[1]{%
+
+% args: text
+\NewDocumentCommand{\subtitle}{m}{%
+    \vspace*{-3em}%
+    \begin{centering}%
+        \bfseries%
+        #1%
+    \end{centering}%
+    \vspace*{2em}%
+}
+
+% args: filename
+\NewDocumentCommand{\artwork}{m}{%
     \vspace*{-2em}%
     \nopagebreak%
     \begin{center}%
@@ -168,7 +175,9 @@
     \end{center}%
     \nopagebreak%
 }
-\newcommand{\released}[3]{%
+
+% args: year, month, day
+\NewDocumentCommand{\released}{m m m}{%
     \vspace*{-1em}%
     \nopagebreak%
     \begin{center}%
@@ -179,25 +188,37 @@
     \fi%
     \nopagebreak%
 }
-\newcommand{\song}[2][]{%
-    \ifthenelse{\equal {#1}{}}{%
-        \section[#2]{#2}\index[songs]{#2}%
+
+% args: index-title, toc-title, title
+\NewDocumentCommand{\song}{O{} O{} m}{%
+    \ifthenelse{\equal {#2}{}}{%
+        \section[#3]{#3}%
     }{%
-        \section[#1]{#2}\index[songs]{#1}%
+        \section[#2]{#3}%
+    }%
+    \ifthenelse{\equal {#1}{}}{%
+        \index[songs]{#3}%
+    }{%
+        \index[songs]{#1}%
     }%
     \nopagebreak%
 }
+
+% args: text
 \newcommand{\writtenby}[1]{%
     \nopagebreak%
     \textscale{0.8}{[Written by: \emph{#1}]}\newline%
     \nopagebreak%
 }
-\newcommand{\note}[1]{%
+
+% args: text
+\NewDocumentCommand{\note}{m}{%
     \nopagebreak%
     \emph{#1}\newline%
     \nopagebreak%
 }
-\newcommand{\word}[2][]{%
+
+\NewDocumentCommand{\word}{O{} m}{%
 	\ifthenelse{\equal {#1}{}}%
 	{\lindex{#2}}%
 	{\lindex{#1}}%
