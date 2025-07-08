@@ -93,15 +93,24 @@
 % Setup page headers/footers
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\arabic{section}.\ #1}}
+
 \fancypagestyle{plain}{%
-   \fancyhf{} % clear all fields
-   \renewcommand{\headrulewidth}{1pt}
-   \lhead{\nouppercase{\leftmark}}
-   \rhead{\nouppercase{\textit{\rightmark}}}
-   \lfoot{}
-   \cfoot{\thepage / \pageref{LastPage}}
-   \rfoot{}
-}%
+	\fancyhf{} % clear all fields
+	\renewcommand{\headrulewidth}{1pt}
+	\lhead{\nouppercase{\leftmark}}
+	\rhead{\nouppercase{\textit{\rightmark}}}
+	\lfoot{}
+	\cfoot{\thepage / \pageref{LastPage}}
+	\rfoot{}
+}
+
+\fancypagestyle{plain}{
+	\fancyhf{} % clear all fields
+	\renewcommand{\headrulewidth}{0pt}
+	\cfoot{\thepage / \pageref{LastPage}}
+}
+
+\pagestyle{empty}
 
 % Setup word underlining
 \renewcommand{\ULdepth}{1.8pt}
@@ -219,17 +228,17 @@
 }
 
 \NewDocumentCommand{\word}{O{} m}{%
-	\ifthenelse{\equal {#1}{}}%
-	{\lindex{#2}}%
-	{\lindex{#1}}%
+	\ifthenelse{\equal {#1}{}}{%
+        \lindex{#2}%
+    }{%
+        \lindex{#1}%
+    }%
 	\underline{#2}%
 }
 
 % Make title page
 \maketitle
 \clearpage
-
-\pagestyle{empty}
 
 % Make frontmatter page
 \include{frontmatter.tex}
@@ -239,9 +248,10 @@
 \iftex4ht
 \else
 	\tableofcontents
+	\thispagestyle{plain}
 \fi
 
-\pagestyle{plain}
+\pagestyle{fancy}
 
 % Add lyrics
 % (Albums)
@@ -250,14 +260,14 @@
 \include{lyrics/12-bar-bruise}
 \include{lyrics/eyes-like-the-sky}
 \include{lyrics/float-along}
-    \include{lyrics/oddments}
-    \include{lyrics/im-in-your-mind-fuzz}
-    \include{lyrics/quarters}
-    \include{lyrics/paper-mache-dream-balloon}
-    \include{lyrics/nonagon-infinity}
+\include{lyrics/oddments}
+\include{lyrics/im-in-your-mind-fuzz}
+\include{lyrics/quarters}
+\include{lyrics/paper-mache-dream-balloon}
+\include{lyrics/nonagon-infinity}
 \include{lyrics/flying-microtonal-banana}
 \include{lyrics/murder-of-the-universe}
-    \include{lyrics/sketches-of-brunswick-east}
+\include{lyrics/sketches-of-brunswick-east}
 \include{lyrics/polygondwanaland}
 \include{lyrics/gumboot-soup}
 \include{lyrics/fishing-for-fishies}
@@ -274,10 +284,12 @@
 \include{lyrics/the-silver-cord}
 \include{lyrics/flight-b741}
 \include{lyrics/phantom-island}
-%
+
 % (EPs)
-\appendix
-\renewcommand\appendixname{EP}%
+%\appendix
+%\renewcommand\appendixname{EP}%
+\renewcommand\chaptername{EP}%
+\setcounter{chapter}{0}
 \renewcommand{\thechapter}{\Roman{chapter}}%
 \renewcommand{\theHchapter}{\Roman{chapter}}%
 %
