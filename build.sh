@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -x "$(command -v ebb)" ]; then
+if [ ! -f "cover-image.xbb" ]; then
     ebb -x cover-image.jpg
 fi
 
