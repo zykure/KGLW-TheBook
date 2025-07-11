@@ -61,6 +61,7 @@
 % Remove lettergroups from EPUB index
 \providecommand*\lettergroupDefault[1]{}
 \providecommand*\lettergroup[1]{}
+\providecommand*\indexspace{}
 
 % Make alphabetical song index (using style file)
 \makeindex[intoc,name=songs,columns=2,title={Song Index},options={-s thebook.ist}]
@@ -298,9 +299,7 @@
 
 % Print song index
 \clearpage
-{\relscale{0.8}
-	\printindex[songs]
-	\printindex
-}
+\printindex[songs]
+\printindex
 
 \end{document}
