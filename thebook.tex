@@ -93,9 +93,9 @@
 
 % Setup page headers/footers
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{\arabic{section}.\ #1}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
-\fancypagestyle{plain}{%
+\fancypagestyle{fancy}{%
 	\fancyhf{} % clear all fields
 	\renewcommand{\headrulewidth}{1pt}
 	\lhead{\nouppercase{\leftmark}}
@@ -142,16 +142,20 @@
 \begin{document}
 
 % Define some shortcuts
+
+% Helper function: create page break in e-book mode.
 \newcommand{\epubnewpage}{%
     \iftex4ht\newpage\fi%
 }
 
+% Helper function: add lowercase word to index.
 % args: text
 \newcommand{\lindex}[1]{%
   \lowercase{\def\temp{#1}}%
   \expandafter\index\expandafter{\temp}%
 }
 
+% Begin new album chapter.
 % args: toc-title, title
 \NewDocumentCommand{\album}{O{} m}{%
     \ifthenelse{\equal {#1}{}}{%
@@ -162,6 +166,7 @@
     \nopagebreak%
 }
 
+% Add album subtitle.
 % args: text
 \NewDocumentCommand{\subtitle}{m}{%
     \vspace*{-3em}%
@@ -172,6 +177,7 @@
     \vspace*{2em}%
 }
 
+% Add album artwork.
 % args: filename
 \NewDocumentCommand{\artwork}{m}{%
     \vspace*{-2em}%
@@ -186,6 +192,7 @@
     \nopagebreak%
 }
 
+% Add album release date.
 % args: year, month, day
 \NewDocumentCommand{\released}{m m m}{%
     \vspace*{-1em}%
@@ -199,6 +206,7 @@
     \nopagebreak%
 }
 
+% Add song title (with optional args for special entry in index/table of contents)
 % args: index-title, toc-title, title
 \NewDocumentCommand{\song}{O{} O{} m}{%
     \ifthenelse{\equal {#2}{}}{%
@@ -214,6 +222,7 @@
     \nopagebreak%
 }
 
+% Add credits for song lyrics ("Written by: xyz").
 % args: text
 \newcommand{\writtenby}[1]{%
     \nopagebreak%
@@ -221,6 +230,7 @@
     \nopagebreak%
 }
 
+% Add a note to the song lyrics.
 % args: text
 \NewDocumentCommand{\note}{m}{%
     \nopagebreak%
@@ -228,6 +238,8 @@
     \nopagebreak%
 }
 
+% Highlight a word/phrase and add it to the word index (lowercase.)
+% args: text
 \NewDocumentCommand{\word}{O{} m}{%
 	\ifthenelse{\equal {#1}{}}{%
         \lindex{#2}%
@@ -260,9 +272,9 @@
 %
 \include{lyrics/12-bar-bruise}
 \include{lyrics/eyes-like-the-sky}                          % DONE w/ sections
-\include{lyrics/float-along}
+\include{lyrics/float-along}								% DONE w/ sections + checked
 \include{lyrics/oddments}                                   % DONE w/ sections + checked
-\include{lyrics/im-in-your-mind-fuzz}
+\include{lyrics/im-in-your-mind-fuzz}						% DONE w/ sections + checked
 \include{lyrics/quarters}
 \include{lyrics/paper-mache-dream-balloon}
 \include{lyrics/nonagon-infinity}
