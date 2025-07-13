@@ -6,3 +6,4 @@
 *.epub filter=lfs diff=lfs merge=lfs -text
 *.mobi filter=lfs diff=lfs merge=lfs -text
 artworks/*.jpg filter=lfs diff=lfs merge=lfs -text
+*.xcf filter=lfs diff=lfs merge=lfs -text
