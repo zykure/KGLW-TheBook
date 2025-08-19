@@ -74,7 +74,7 @@
     \Huge%
     \centering%
     \iftex4ht%
-        \includegraphics[width=0.5\linewidth]{cover-image.jpg}\\[1em]%
+        \includegraphics[width=0.6\linewidth]{cover-image.jpg}\\[1em]%
     \else
         \includegraphics[width=0.8\linewidth]{cover-image.jpg}\\[2em]%
     \fi
@@ -251,11 +251,10 @@
 
 % Make title page
 \maketitle
-\clearpage
 
 % Make frontmatter page
 \include{frontmatter.tex}
-\clearpage
+\pagebreak
 
 % Print table of contents
 \iftex4ht
@@ -270,16 +269,16 @@
 % (Albums)
 \renewcommand{\chaptername}{Album}%
 %
-\include{lyrics/12-bar-bruise}
-\include{lyrics/eyes-like-the-sky}                          % DONE w/ sections
-\include{lyrics/float-along}								% DONE w/ sections + checked
-\include{lyrics/oddments}                                   % DONE w/ sections + checked
-\include{lyrics/im-in-your-mind-fuzz}						% DONE w/ sections + checked
-\include{lyrics/quarters}
-\include{lyrics/paper-mache-dream-balloon}
-\include{lyrics/nonagon-infinity}
-\include{lyrics/flying-microtonal-banana}					% DONE w/ sections + checked
-\include{lyrics/murder-of-the-universe}
+\include{lyrics/12-bar-bruise}								% DONE
+\include{lyrics/eyes-like-the-sky}                          % DONE
+\include{lyrics/float-along}								% DONE
+\include{lyrics/oddments}                                   % DONE
+\include{lyrics/im-in-your-mind-fuzz}						% DONE
+\include{lyrics/quarters}									% DONE
+\include{lyrics/paper-mache-dream-balloon}					% DONE
+\include{lyrics/nonagon-infinity}							% DONE
+\include{lyrics/flying-microtonal-banana}					% DONE
+\include{lyrics/murder-of-the-universe}						% DONE
 \include{lyrics/sketches-of-brunswick-east}
 \include{lyrics/polygondwanaland}
 \include{lyrics/gumboot-soup}
@@ -306,11 +305,11 @@
 \renewcommand{\thechapter}{\Roman{chapter}}%
 \renewcommand{\theHchapter}{\Roman{chapter}}%
 %
-\include{lyrics/willoughbys-beach}
+\include{lyrics/willoughbys-beach}							% DONE
 \include{lyrics/teenage-gizzard}
 
 % Print song index
-\clearpage
+\newpage
 \printindex[songs]
 \printindex
 
