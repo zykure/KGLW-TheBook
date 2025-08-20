@@ -186,7 +186,7 @@
 		\iftex4ht%
 			\includegraphics[width=0.6\linewidth]{artworks/#1}%
 		\else%
-			\includegraphics[width=0.4\linewidth]{artworks/#1}%
+			\includegraphics[width=0.5\linewidth]{artworks/#1}%
 		\fi%
     \end{center}%
     \nopagebreak%
@@ -226,7 +226,23 @@
 % args: text
 \newcommand{\writtenby}[1]{%
     \nopagebreak%
-    \textscale{0.8}{[Written by: \emph{#1}]}\newline%
+    \textscale{0.8}{[Written by: \textit{#1}]}\newline%
+    \nopagebreak%
+}
+
+% Add note on vocals for song lyrics.
+% args: text
+\newcommand{\vocalsby}[1]{%
+    \nopagebreak%
+    \textscale{1.0}{[\textit{#1:}]}\newline%
+    \nopagebreak%
+}
+
+% Add note on vocals for song lyrics.
+% args: text
+\newcommand{\songsection}[1]{%
+    \nopagebreak%
+    \textscale{0.9}{\textbf{#1}}\newline%
     \nopagebreak%
 }
 
@@ -279,13 +295,13 @@
 \include{lyrics/nonagon-infinity}							% DONE
 \include{lyrics/flying-microtonal-banana}					% DONE
 \include{lyrics/murder-of-the-universe}						% DONE
-\include{lyrics/sketches-of-brunswick-east}
-\include{lyrics/polygondwanaland}
-\include{lyrics/gumboot-soup}
-\include{lyrics/fishing-for-fishies}
-\include{lyrics/infest-the-rats-nest}
-\include{lyrics/kg.tex}
-\include{lyrics/lw.tex}
+\include{lyrics/sketches-of-brunswick-east}					% DONE
+\include{lyrics/polygondwanaland}							% DONE
+\include{lyrics/gumboot-soup}								% DONE
+\include{lyrics/fishing-for-fishies}						% DONE
+\include{lyrics/infest-the-rats-nest}						% DONE
+\include{lyrics/kg.tex}										% DONE
+\include{lyrics/lw.tex}										% DONE
 \include{lyrics/butterfly-3000}
 \include{lyrics/made-in-timeland.tex}
 \include{lyrics/omnium-gatherum.tex}
