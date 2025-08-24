@@ -1,6 +1,7 @@
 # KGLW - TheBook
 
-This e-book collects all lyrics from the Australian band King Gizzard & the Lizard Wizard.
+This e-book collects all lyrics from the Australian band **King Gizzard & the Lizard Wizard**.
+
 I started this project in June 2025 because I wanted to read Gizz lyrics on my e-book reader while listening to their music.
 The included songs are grouped by album, and albums are added in chronological order (oldest first.)
 There is also a song index at the end of the document that lists all songs in alphabetical order regardless of album,
@@ -8,12 +9,22 @@ and a word index that references selected words that are reoccuring throughout t
 
 ## Download
 
+You can download the e-book in the following formats. EPUB and MOBI should work on most e-book reader devices.
+
+[:arrow_forward:**PDF**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.pdf)
+
+[:arrow_forward:**EPUB**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.epub)
+
+[:arrow_forward:**MOBI**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.mobi)
 
 ## Copyright
 
-All artwork and lyrics are copyright by King Gizzard & the Lizard Wizard and the respective authors.
+All artwork and lyrics are copyright by King Gizzard & the Lizard Wizard and the respective authors.\
+See [kinggizzardandthelizardwizard.com](https://kinggizzardandthelizardwizard.com/) for details.
 
 ## Requirements
+
+You can build the e-book yourself from the sources in this repository. Make sure you have the following requirements.
 
 * TexLive or MiKTeX installation with TeX4ht / TeX4ebook support
 * LaTeX packages: `geometry, parskip, relsize, CrimsonPro, fontenc, inputenc, imakeidx, tex4ebook, ifthen, fancyhdr, titlesec, contour, ulem, nowidow, lastpage, datetime, graphicx, xcolor, hyperref`
@@ -30,7 +41,9 @@ sudo apt install texlive-extra texlive-extra-utils xindy calibre tidy
 
 ## Building
 
-Simply run the build script `build.sh` (Linux) or `build.bat` (Windows).
+Download the sources via `git clone` or by downloading a [ZIP archive](https://github.com/zykure/KGLW-TheBook/archive/refs/heads/main.zip).
+
+Then, simply run the build script `build.sh` (Linux) or `build.bat` (Windows).\
 This should produce the PDF result from LaTeX, and the EPUB/MOBI converted result using TeX4ht.
 
 ## Notes
