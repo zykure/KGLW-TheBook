@@ -2,6 +2,8 @@
 
 This e-book collects all lyrics from the Australian band **King Gizzard & the Lizard Wizard**.
 
+<img src="./teaser-image.jpg" alt="Teaser image" width="400"/>
+
 I started this project in June 2025 because I wanted to read Gizz lyrics on my e-book reader while listening to their music.
 The included songs are grouped by album, and albums are added in chronological order (oldest first.)
 There is also a song index at the end of the document that lists all songs in alphabetical order regardless of album,
