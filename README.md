@@ -9,13 +9,15 @@ and a word index that references selected words that are reoccuring throughout t
 
 ## Download
 
-You can download the e-book in the following formats. EPUB and MOBI should work on most e-book reader devices.
+You can download the latest version of the e-book in the following formats. EPUB and MOBI should work on most e-book reader devices.
 
 [:arrow_forward:**PDF**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.pdf)
 
 [:arrow_forward:**EPUB**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.epub)
 
 [:arrow_forward:**MOBI**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.mobi)
+
+Alternatively, head to the [Releases](https://github.com/zykure/KGLW-TheBook/releases) page to download the latest or an earlier version.
 
 ## Copyright
 
