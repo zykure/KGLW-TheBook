@@ -262,7 +262,8 @@
     }{%
         \lindex{#1}%
     }%
-	\underline{#2}%
+	%\underline{#2}%
+	\emph{#2}
 }
 
 % Make title page
@@ -326,7 +327,11 @@
 
 % Print song index
 \newpage
+%
+\label{ref:index:songs}
 \printindex[songs]
+%
+\label{ref:index:words}
 \printindex
 
 \end{document}
