@@ -9,6 +9,7 @@
 
 \usepackage[a4paper,total={6.5in,9in}]{geometry}
 \usepackage[skip=0pt plus1pt, indent=0pt]{parskip}
+\usepackage{setspace}
 \usepackage{relsize}
 \iftex4ht
 \else
@@ -30,6 +31,7 @@
 \usepackage{contour}
 \usepackage[normalem]{ulem}
 \usepackage[defaultlines=3,all]{nowidow}
+\usepackage{needspace}
 \usepackage{lastpage}
 \usepackage[nodayofweek]{datetime}
 \usepackage{graphicx}
@@ -129,6 +131,16 @@
 \titlespacing*{\chapter}
     {0pt}{20pt}{40pt}
 
+% Smart page break (when not enough space is left on the page)
+\newcommand{\smartpagebreak}{%
+	\Needspace{0.22\textheight}%
+}
+
+% Each section starts a new page (using smart page breaks)
+\newcommand\sectionbreak{%
+	\smartpagebreak%
+}
+
 % Fix TeX4ht issues where some commands are undefined
 \ifdefined\theHchapter\else\newcommand\theHchapter{\Alph{chapter}}\fi
 
@@ -142,11 +154,6 @@
 \begin{document}
 
 % Define some shortcuts
-
-% Helper function: create page break in e-book mode.
-\newcommand{\epubnewpage}{%
-    \iftex4ht\newpage\fi%
-}
 
 % Helper function: add lowercase word to index.
 % args: text
@@ -184,7 +191,7 @@
     \nopagebreak%
     \begin{center}%
 		\iftex4ht%
-			\includegraphics[width=0.6\linewidth]{artworks/#1}%
+			\includegraphics[width=0.5\linewidth]{artworks/#1}%
 		\else%
 			\includegraphics[width=0.5\linewidth]{artworks/#1}%
 		\fi%
@@ -201,7 +208,7 @@
         \textit{Released: \shortdate\formatdate{#3}{#2}{#1}}%
     \end{center}%
     \iftex4ht%
-        \epubnewpage%
+        \newpage%
     \fi%
     \nopagebreak%
 }
@@ -226,7 +233,8 @@
 % args: text
 \newcommand{\writtenby}[1]{%
     \nopagebreak%
-    \textscale{0.8}{[Written by: \textit{#1}]}\newline%
+    \textscale{.75}{[Written by: \textit{#1}]}%
+	\newline\vspace{-.4\baselineskip}%
     \nopagebreak%
 }
 
@@ -234,7 +242,8 @@
 % args: text
 \newcommand{\vocalsby}[1]{%
     \nopagebreak%
-    \textscale{1.0}{[\textit{#1:}]}\newline%
+    \textscale{.875}{[\hspace{.12em}\textit{#1:}\hspace{.12em}]}%
+	\newline\vspace{-.3\baselineskip}%
     \nopagebreak%
 }
 
@@ -242,7 +251,8 @@
 % args: text
 \newcommand{\songsection}[1]{%
     \nopagebreak%
-    \textscale{0.9}{\textbf{#1}}\newline%
+    \textscale{.875}{\textbf{#1}}%
+	\newline\vspace{-.3\baselineskip}%
     \nopagebreak%
 }
 
@@ -263,7 +273,7 @@
         \lindex{#1}%
     }%
 	%\underline{#2}%
-	\emph{#2}
+	\emph{#2}%
 }
 
 % Make title page

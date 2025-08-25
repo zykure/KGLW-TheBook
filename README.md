@@ -31,7 +31,7 @@ See [kinggizzardandthelizardwizard.com](https://kinggizzardandthelizardwizard.co
 You can build the e-book yourself from the sources in this repository. Make sure you have the following requirements.
 
 * TexLive or MiKTeX installation with TeX4ht / TeX4ebook support
-* LaTeX packages: `geometry, parskip, relsize, CrimsonPro, fontenc, inputenc, imakeidx, tex4ebook, ifthen, fancyhdr, titlesec, contour, ulem, nowidow, lastpage, datetime, graphicx, xcolor, hyperref`
+* LaTeX packages: `geometry, parskip, setspace, relsize, CrimsonPro, fontenc, inputenc, imakeidx, tex4ebook, ifthen, fancyhdr, titlesec, contour, ulem, nowidow, needspace, lastpage, datetime, graphicx, xcolor, hyperref`
   * The `indexing4ht` package from https://github.com/michal-h21/helpers4ht is included here
 * Xindy (for indexing support with TeX4ht)
 * Calibre (to produce MOBI format for Kindle devices)
