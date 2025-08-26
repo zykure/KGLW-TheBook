@@ -110,30 +110,29 @@ for infile in sys.argv[2:]:
                 p0, p1 = m.start(), m.end()
                 cmd, _, opt, arg = m.groups()
 
-                # process next line segment
-                m = COMMAND_REGEX.search(line[p1+1:])
-                
                 if cmd == 'album':
                     # update current album name
                     album_name = replace_chars(arg)
                     current_album = Album(album_name)
                     album_list.append(current_album)
-                    line = line[:p0] + line[p1+1:]
-                    continue
+                    line = line[:p0] + line[p1:]
+                    break
                 elif cmd == 'song':
                     # update current song name
                     song_name = replace_chars(arg)
                     current_song = Song(song_name, album_name)
                     current_album.add_song(current_song)
-                    line = line[:p0] + line[p1+1:]
-                    continue
+                    line = line[:p0] + line[p1:]
+                    break
                 elif cmd == 'word':
                     # replace \word{foo}  -> foo
                     line = line[:p0] + arg.strip() + line[p1:]
                 else:
                     # ignore any other commands
-                    line = line[:p0] + line[p1+1:]
-                    continue
+                    line = line[:p0] + line[p1:]
+                    
+                m = COMMAND_REGEX.search(line)
+                continue
 
             # process line
             for line in split_line(line):
