@@ -129,7 +129,7 @@ for infile in sys.argv[2:]:
                     continue
                 elif cmd == 'word':
                     # replace \word{foo}  -> foo
-                    line = line[:p0] + arg.strip() + line[p1+1:]
+                    line = line[:p0] + arg.strip() + line[p1:]
                 else:
                     # ignore any other commands
                     line = line[:p0] + line[p1+1:]

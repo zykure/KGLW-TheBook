@@ -15,7 +15,7 @@
 			const symbols_gameover  = ['😵', '😵‍💫', '😖', '😭', '🤬'];
 			
 			// Load songs from JSON
-			var songs =[];
+			var songs = [];
 			loadSongData();
 
 			// Setup internal variables
@@ -24,20 +24,10 @@
 
 			var uniq_lyrics = [];
 			var num_lyrics = 0;
-			
-			var used_lines = [];
-
-			// Restore current song (when submitted via form)
-			restoreSong();
-			
-			// Choose a new song if none was set yet
-			if (current_song == null)
-				resetGame();
 
 			// Restore last guess count
 			var guessed_count = 0;
-			restoreGuessCount();
-			
+
 			function loadSongData() {
 				songs = [];
 				all_lyrics.albums.forEach((album) => {
@@ -48,47 +38,35 @@
 				console.log("Loaded songs: ", songs);
 			}
 			
-			function restoreGuessCount() {
-				guessed_count = $('#guessed-count').val();
-				if (guessed_count == null)
-					guessed_count = 0;
-				console.log("Current guess count: ", guessed_count);
-			}
-			
-			function restoreSong() {
-				var song_name = $('#song-name').val();
-				if (song_name == null)
-					return;
-					
-				current_song = songs[song_name];
-				current_song_name = current_song.name.toLowerCase();
-				console.log("Restored current song: ", current_song.name);
-
-				used_lines = $('#used-lines').val().split(',');
-					
-				updateSongLyrics();
-			}
-			
 			function chooseNewSong() {
-				current_song = randomChoice(songs);
-				current_song_name = current_song.name.toLowerCase();
-				$('#song-name').val(current_song_name);
-				console.log("Set current song: ", current_song.name);
-				
+				while (true) {
+					current_song = randomChoice(songs);
+					current_song_name = current_song.name.toLowerCase();
+					console.log("Set current song: ", current_song.name);
+					
+					updateSongLyrics();
+					
+					if (num_lyrics > 3)
+						break;
+						
+					console.log("Not enough lines, choosing new song.");
+				}
+
 				guessed_count = 0;
-				used_lines = [];
-				
-				updateSongLyrics();
 			}
 			
 			function updateSongLyrics() {
 				uniq_lyrics = [...new Set(current_song.lyrics)];
 				num_lyrics = uniq_lyrics.length;
+				console.log("Number of unique lines: ", num_lyrics);
 			}
 
 			// Function to choose random entry from input array
 			function randomIndex(arr) {
-				return Math.floor(arr.length * Math.random());
+				var index = Math.floor(arr.length * Math.random());
+				if (index >= arr.length)
+					index = arr.length - 1;
+				return index;
 			}
 			
 			function randomChoice(arr) {
@@ -97,17 +75,14 @@
 			
 			// Update the user prompt
 			function updatePrompt() {
-				var line_index = randomIndex(uniq_lyrics);
-				while (used_lines.includes(line_index)) {
-					line_index = randomIndex(uniq_lyrics);
-				}
-					
-				used_lines.push(line_index);					
+				var line_index = randomIndex(uniq_lyrics);		
+				uniq_lyrics.splice(line_index, 1);  // remove line
+				console.log("Choosing line no.: ", line_index);
+				
 				lyrics_line = uniq_lyrics[line_index];
 				$('#lyrics-line').html("» " + lyrics_line + " «");
 				
 				$('#guessed-name').val("");
-				$('#used-lines').val(used_lines.join(','));
 			}
 			
 			function resetGame() {
@@ -143,11 +118,10 @@
 				}
 			
 				guessed_count++;
-				if (guessed_count >= num_lyrics || used_lines.length >= num_lyrics)
-					game_over = true;
-
-				$('#guessed-count').val(guessed_count);
 				console.log("Current guess count: ", guessed_count);
+
+				if (guessed_count >= num_lyrics || uniq_lyrics.length == 0)
+					game_over = true;
 				
 				var guessed_text = guessed_count + " guesses";
 				if (guessed_count == 1) {
@@ -187,20 +161,33 @@
 			}
 			
 			$(document).ready(function() {
-				updatePrompt();
+				resetGame();
 			});
 		</script>
 		<style>
 			body {
+				background-color: #333;
+				color: #FFF;
 				text-align: center;
 				max-width: 1000px;
 				text-align: center;
 				margin: 50px auto;
+				font-family: Verdana,Arial,Helvetica,sans-serif;
+			}
+			
+			@keyframes result-anim {
+				from {
+					transform: rotate(-1.8deg);
+				}
+				to {
+					transform: rotate(1.8deg);
+				}
 			}
 			
 			.result {
 				font-size: 120%;
 				margin-top: 50px;
+				animation: result-anim 1s ease-in-out 0s infinite alternate;
 			}
 			
 			.symbol {
@@ -217,8 +204,8 @@
 				font-size: 120%;
 				font-style: italic;
 				font-weight: bold;
-				background-color: #F0F6C1;
-				border: 2px solid #D2E449;
+				background-color: #2f864d;
+				border: 2px solid #50d22d;
 				border-radius: 12px;
 				padding: 20px;
 				margin: 20px 100px;
@@ -228,17 +215,15 @@
 				font-size: 120%;
 			}
 			
-			#song-name {
-				padding: 2px;
-			}
-			
 			#guessed-name {
 				font-size: 110%;
 				margin: 10px;
 				padding: 6px;
-				color: #3721DE;
-				border: 1px solid #7768E8;
+				color: #FFF;
+				background-color: #666;
+				border: 2px solid #6ba1f3;
 				border-radius: 6px;
+				text-align: center;
 			}
 			
 			#submit,
@@ -249,17 +234,17 @@
 			}
 
 			#submit {
-				background-color: #C1F6C7;
-				border: 1px solid #68E877;
+				background-color: #3ecf97;
+				border: 1px solid #3ecf97;
 				border-radius: 6px;
 			}
 			#submit:disabled {
-				background-color: #EEE;
+				background-color: #94908b;
 			}
 			
 			#reset {
-				background-color: #F6C1F0;
-				border: 1px solid #E868D9;
+				background-color: #dc3d7d;
+				border: 1px solid #dc3d7d;
 				border-radius: 6px;
 			}
 		</style>
@@ -268,33 +253,37 @@
 		<h1>
 			What the Gizz?!
 		</h1>
+
 		<h2>
 			Guess this Gizz song by the following lyrics line:
 		</h2>
+
 		<h3 id="lyrics-line">
 			???
 		</h3>
+
 		<form id="next-guess" name="next-guess">
-			<label for="song-name">Song Name:</label><br/>
+			<label for="guessed-name">Song Name:</label><br/>
 			<input type="text" id="guessed-name" name="guessed-name" size="30"/>
-			<input type="hidden" id="song-name" name="song-name"/>
-			<input type="hidden" id="guessed-count" name="guessed-count"/>
-			<input type="hidden" id="used-lines" name="used-lines"/>
 		</form>
-		<button type="button" id="submit" form="next-guess" value="submit" onClick="submitGuess()">Submit!</button>
-		<button type="button" id="reset" form="next-guess" value="reset" onClick="resetGame()">Reset</button>
+
+		<button type="button" id="submit" value="submit" onClick="submitGuess()">Submit!</button>
+		<button type="button" id="reset" value="reset" onClick="resetGame()">Reset</button>
+
 		<p id="result-incorrect" class="result">
 			<span id="symbol-incorrect-1" class="symbol"></span>
 			<b>Incorrect!</b>
 			You've used <span id="guessed-count-incorrect">0 guesses</span> so far. Try again?
 			<span id="symbol-incorrect-2" class="symbol"></span>
 		</p>
+
 		<p id="result-correct" class="result">
 			<span id="symbol-correct-1" class="symbol"></span>
 			<b>Correct!</b>
 			You've used <span id="guessed-count-correct">0 guesses</span> to get there.
 			<span id="symbol-correct-2" class="symbol"></span>
 		</p>
+
 		<p id="result-gameover" class="result">
 			<span id="symbol-gameover-1" class="symbol"></span>
 			<b>GAME OVER!</b> 
