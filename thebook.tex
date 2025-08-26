@@ -32,7 +32,7 @@
 \usepackage[normalem]{ulem}
 \usepackage[defaultlines=3,all]{nowidow}
 \usepackage{needspace}
-\usepackage{lastpage}
+%\usepackage{lastpage}
 \usepackage[nodayofweek]{datetime}
 \usepackage{graphicx}
 \usepackage{xcolor}
@@ -97,20 +97,24 @@
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
 
+% Define default page style, with header line and page numbers
 \fancypagestyle{fancy}{%
 	\fancyhf{} % clear all fields
 	\renewcommand{\headrulewidth}{1pt}
 	\lhead{\nouppercase{\leftmark}}
 	\rhead{\nouppercase{\textit{\rightmark}}}
 	\lfoot{}
-	\cfoot{\thepage / \pageref{LastPage}}
+	%\cfoot{\thepage / \pageref{LastPage}}
+	\cfoot{--\,\thepage\,--}
 	\rfoot{}
 }
 
+% Redefine plain style to add page numbers on chapter start
 \fancypagestyle{plain}{
 	\fancyhf{} % clear all fields
 	\renewcommand{\headrulewidth}{0pt}
-	\cfoot{\thepage / \pageref{LastPage}}
+	%\cfoot{\thepage / \pageref{LastPage}}
+	\cfoot{--\,\thepage\,--}
 }
 
 \pagestyle{empty}
@@ -175,7 +179,7 @@
 
 % Add album subtitle.
 % args: text
-\NewDocumentCommand{\subtitle}{m}{%
+\NewDocumentCommand{\albumsubtitle}{m}{%
     \vspace*{-3em}%
     \begin{centering}%
         \bfseries%
@@ -283,18 +287,26 @@
 \include{frontmatter.tex}
 \pagebreak
 
-% Print table of contents
-\iftex4ht
-\else
-	\tableofcontents
-	\thispagestyle{plain}
-\fi
-
 \pagestyle{fancy}
 
 % Add lyrics
+% (EPs)
+\pagenumbering{roman}
+\renewcommand\chaptername{EP}%
+\setcounter{chapter}{0}
+\renewcommand{\thechapter}{\Roman{chapter}}%
+\renewcommand{\theHchapter}{\Roman{chapter}}%
+%
+\include{lyrics/willoughbys-beach}							% DONE
+\include{lyrics/teenage-gizzard}							% DONE
+
+% Add lyrics
 % (Albums)
+\pagenumbering{arabic}
 \renewcommand{\chaptername}{Album}%
+\setcounter{chapter}{0}
+\renewcommand{\thechapter}{\arabic{chapter}}%
+\renewcommand{\theHchapter}{\arabic{chapter}}%
 %
 \include{lyrics/12-bar-bruise}								% DONE
 \include{lyrics/eyes-like-the-sky}                          % DONE
@@ -324,23 +336,27 @@
 \include{lyrics/flight-b741}								% DONE
 \include{lyrics/phantom-island}								% DONE
 
-% (EPs)
-%\appendix
-%\renewcommand\appendixname{EP}%
-\renewcommand\chaptername{EP}%
-\setcounter{chapter}{0}
-\renewcommand{\thechapter}{\Roman{chapter}}%
-\renewcommand{\theHchapter}{\Roman{chapter}}%
-%
-\include{lyrics/willoughbys-beach}							% DONE
-\include{lyrics/teenage-gizzard}							% DONE
+% Print table of contents
+\clearpage
+\pagenumbering{Roman}
+\pagestyle{plain}
+\iftex4ht
+	% no TOC added here
+\else
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Contents}
+	\renewcommand{\contentsname}{Table of Contents}
+	\tableofcontents
+	\thispagestyle{plain}
+\fi
 
 % Print song index
-\newpage
-%
+\clearpage
 \label{ref:index:songs}
 \printindex[songs]
-%
+
+% Print word index
+\clearpage
 \label{ref:index:words}
 \printindex
 
