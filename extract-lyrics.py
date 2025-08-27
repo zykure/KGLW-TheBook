@@ -25,6 +25,7 @@ CHAR_REPLACEMENTS = {
     ')': '',
     "``": '',
     "''": '',
+    "--": '-',
 }
 
 def replace_chars(text: str):
