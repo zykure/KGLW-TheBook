@@ -13,7 +13,7 @@ COMMENT_REGEX = re.compile(r'%(.*)$', re.DOTALL)
 COMMAND_REGEX = re.compile(r'\\([A-Za-z]+)(\[.*\])?\{(.*?)\}', re.MULTILINE | re.DOTALL)
 
 # Regex to split lines into segments
-SPLIT_REGEX = re.compile(r'([.:;:…?!\(\)])')
+SPLIT_REGEX = re.compile(r'([.:…?!\(\)])')
 
 # Replacement table for LaTeX symbols (for song titles, etc.)
 SYMBOL_REPLACEMENTS = {
@@ -31,6 +31,8 @@ SYMBOL_REPLACEMENTS_ALL = {
     ')': '',
 }
 
+SYMBOL_REPLACEMENTS_ALL.update(SYMBOL_REPLACEMENTS)
+
 def replace_symbols(text: str, replace_all: bool = False):
     """Replace special characters in text.
 
@@ -38,9 +40,8 @@ def replace_symbols(text: str, replace_all: bool = False):
         replace_symbols("``Hello world.'' \\") -> "Hello world."
         replace_symbols("Hello (world.)", replace_all=True) -> "Hello world."
     """
-    replacements = SYMBOL_REPLACEMENTS
-    if replace_all:
-        replacements.update(SYMBOL_REPLACEMENTS_ALL)
+    replacements = SYMBOL_REPLACEMENTS_ALL if replace_all \
+                   else SYMBOL_REPLACEMENTS
     for k, v in replacements.items():
         text = text.replace(k, v)
     return text.strip()
@@ -190,6 +191,7 @@ for infile in sys.argv[2:]:
                 elif cmd == 'song':
                     # Update current song : \song{foo}
                     song_name = replace_symbols(arg)
+                    print(arg, song_name)
                     current_song = Song(song_name, album_name)
                     current_album.add_song(current_song)
                     
