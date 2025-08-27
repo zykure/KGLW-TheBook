@@ -1,4 +1,4 @@
-# KGLW - TheBook
+# KGLW - The Book
 
 This e-book collects all lyrics from the Australian band **King Gizzard & the Lizard Wizard**.
 
@@ -20,6 +20,12 @@ You can download the latest version of the e-book in the following formats. EPUB
 [:arrow_forward:**MOBI**](https://github.com/zykure/KGLW-TheBook/raw/refs/heads/main/thebook.mobi)
 
 Alternatively, head to the [Releases](https://github.com/zykure/KGLW-TheBook/releases) page to download the latest or an earlier version.
+
+## Browser Game
+
+This project inspired a little browser game where you need to guess songs from random lyrics lines. It is hosted on GitHub:
+
+https://zykure.github.io/what-the-gizz/
 
 ## Copyright
 
