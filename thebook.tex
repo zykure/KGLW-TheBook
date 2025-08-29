@@ -277,7 +277,8 @@
         \lindex{#1}%
     }%
 	%\underline{#2}%
-	\emph{#2}%
+	%\emph{#2}%
+	\hyperref[ref:index:words]{#2}%
 }
 
 % Make title page
@@ -352,12 +353,14 @@
 
 % Print song index
 \clearpage
-\label{ref:index:songs}
+\phantomsection
 \printindex[songs]
+\label{ref:index:songs}
 
 % Print word index
 \clearpage
-\label{ref:index:words}
+\phantomsection
 \printindex
+\label{ref:index:words}
 
 \end{document}
