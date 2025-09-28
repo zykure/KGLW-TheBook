@@ -7,21 +7,22 @@ import sys
 ########################################
 
 # Regex to find LaTeX comments
-COMMENT_REGEX = re.compile(r'%(.*)$', re.DOTALL)
+COMMENT_REGEX = re.compile(r"%(.*)$", re.DOTALL)
 
 # Regex to find LaTeX commands
-COMMAND_REGEX = re.compile(r'\\([A-Za-z]+)(\[.*\])?\{(.*?)\}', re.MULTILINE | re.DOTALL)
+COMMAND_REGEX = re.compile(r"\\([A-Za-z]+)(\[.*\])?\{(.*?)\}", re.MULTILINE | re.DOTALL)
 
 # Regex to split lines into segments
-SPLIT_REGEX = re.compile(r'([.:…?!\(\)])')
+SPLIT_REGEX = re.compile(r"([.:…?!]\s|\s\(|\)\s|\.''\s)")
 
 # Replacement table for LaTeX symbols (for song titles, etc.)
 SYMBOL_REPLACEMENTS = {
+    '~': ' ',
     '\\': '',
     '\$': '$',
     '\&': '&',
-    "``": '',
-    "''": '',
+    "``": '"',
+    "''": '"',
     "--": '-',
 }
 
@@ -215,7 +216,7 @@ for infile in sys.argv[2:]:
                 continue
 
             # Tokenize line, add segments to song lyrics
-            for tok in split_line(line):
+            for tok in split_line(line, keep_delim=True):
 
                 # Replace remaining LaTeX symbols
                 tok = replace_symbols(tok, replace_all=True).strip()
